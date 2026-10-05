@@ -22,3 +22,10 @@
   What can spaCy do?
   For example, if the resume contains:
   "Developed a Spring Boot backend using Java and PostgreSQL. Implemented JWT authentication and Redis caching."
+
+  It can also provide:
+- 🧠 Tokenization — breaks text into words/tokens
+- 🏷️ Named Entity Recognition (NER) — identifies entities such as organizations, people, locations, etc.
+- 🔤 Part-of-speech tagging
+- 🌳 Dependency parsing — analyzes relationships between words
+- 📊 Linguistic features useful for downstream NLP
