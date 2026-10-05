@@ -6,7 +6,7 @@ Here’s the development roadmap for IntervAI.
 
 # Phase 1: Project Setup & Database
 
-- [x] Create FastAPI Project
+- [ ] Create FastAPI Project
 - [ ] Configure Python Virtual Environment
 - [ ] Configure Project Structure
 - [ ] Configure PostgreSQL
