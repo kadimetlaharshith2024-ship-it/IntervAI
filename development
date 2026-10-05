@@ -1,0 +1,858 @@
+# IntervAI — Adaptive Resume-Grounded Mock Interview System
+## Complete Development Roadmap
+
+---
+
+# PHASE 1: PROJECT SETUP & DATABASE LAYER
+
+☐ Configure FastAPI Project Structure
+   ├── app/
+   ├── core/
+   ├── models/
+   ├── routes/
+   ├── services/
+   └── schemas/
+
+☐ Configure PostgreSQL Database & Connection
+   ├── SQLAlchemy
+   ├── PostgreSQL Driver
+   └── Database Session Management
+
+☐ Configure Environment Variables
+   ├── .env
+   ├── Database URL
+   ├── LLM/API Keys
+   └── Application Port
+
+☐ Implement Base Database Models & Migrations
+   ├── resumes
+   ├── skills
+   ├── resume_skills
+   ├── relationships
+   ├── interview_sessions
+   ├── interview_questions
+   └── interview_answers
+
+☐ Add Database Constraints
+   ├── Primary Keys
+   ├── Foreign Keys
+   ├── Unique Constraints
+   ├── NOT NULL Constraints
+   └── Indexes
+
+☐ Test Database Connection & Schema Initialization
+
+### MILESTONE
+
+FastAPI runs with a clean modular architecture.
+
+PostgreSQL is connected successfully and all required tables, constraints,
+foreign keys, and indexes are created and verified.
+
+---
+
+# PHASE 2: RESUME INGESTION & TEXT PARSING
+
+☐ Create Resume Upload Endpoint
+
+   POST /api/resumes/upload
+
+☐ Implement PDF File Validation
+
+   ├── Validate file extension
+   ├── Validate MIME type
+   ├── Reject corrupted PDFs
+   └── Apply file-size limits
+
+☐ Implement PDF Text Extraction
+
+   └── pdfplumber
+
+☐ Implement Text Normalization
+
+   ├── Remove unnecessary whitespace
+   ├── Normalize line breaks
+   ├── Remove encoding artifacts
+   └── Clean extracted text
+
+☐ Implement Resume Section Detection
+
+   ├── Experience
+   ├── Projects
+   ├── Skills
+   ├── Education
+   └── Other Sections
+
+☐ Store Resume Record in PostgreSQL
+
+   ├── Filename
+   ├── Raw Text
+   ├── Upload Timestamp
+   └── Processing Status
+
+☐ Test Using Postman
+
+   ├── Valid single-page PDF
+   ├── Valid multi-page PDF
+   ├── Corrupt PDF
+   ├── Non-PDF file
+   └── Empty/invalid document
+
+### MILESTONE
+
+Candidate can upload a resume PDF.
+
+The system extracts, cleans, and logically sections the resume text
+and stores the raw document information in PostgreSQL.
+
+---
+
+# PHASE 3: ENTITY EXTRACTION & CONTEXTUAL UNDERSTANDING
+
+☐ Integrate Hugging Face Transformers
+
+☐ Implement Transformer-Based Entity Extraction
+
+☐ Extract Technical Entities
+
+   ├── Programming Languages
+   ├── Frameworks
+   ├── Libraries
+   ├── Databases
+   ├── Cloud Platforms
+   ├── Infrastructure Tools
+   ├── Technologies
+   ├── Project Titles
+   └── Quantifiable Metrics
+
+☐ Normalize Extracted Entities
+
+   ├── Case normalization
+   ├── Duplicate removal
+   ├── Alias handling
+   └── Technology name normalization
+
+☐ Assign Confidence Scores
+
+☐ Persist Extracted Entities
+
+   ├── Insert unique skills into skills
+   └── Insert resume-skill mappings into resume_skills
+
+☐ Test Entity Extraction
+
+   ├── Compare extracted entities with resume text
+   ├── Verify confidence scores
+   └── Check duplicate handling
+
+### MILESTONE
+
+The resume is no longer treated as flat text.
+
+Technical assets are converted into structured, typed entities
+that can be queried and used by later stages of the system.
+
+---
+
+# PHASE 4: RELATIONSHIP EXTRACTION & CANDIDATE KNOWLEDGE MAPPING
+
+☐ Define Relationship Predicate Schema
+
+   ├── USED_FOR
+   ├── IMPLEMENTED_WITH
+   ├── INTEGRATED_WITH
+   ├── DEPLOYED_ON
+   ├── OPTIMIZED_VIA
+   ├── BUILT_USING
+   └── DEPENDS_ON
+
+☐ Implement Relationship Extraction Pipeline
+
+   ├── Contextual entity analysis
+   ├── Sentence-level relationship detection
+   └── Entity-to-entity dependency analysis
+
+☐ Construct Structured Triplets
+
+   Examples:
+
+   (JWT, USED_FOR, Authentication)
+
+   (Spring Security, IMPLEMENTS, JWT)
+
+   (Redis, USED_FOR, Caching)
+
+   (Spring Boot, INTEGRATED_WITH, PostgreSQL)
+
+☐ Assign Relationship Confidence Scores
+
+☐ Persist Relationships in PostgreSQL
+
+☐ Create Relationship Graph Query
+
+   GET /api/resumes/{id}/relationships
+
+☐ Test Relationship Extraction
+
+   ├── Simple relationships
+   ├── Multiple relationships
+   ├── Cross-sentence relationships
+   └── Complex project claims
+
+### MILESTONE
+
+The system understands connections between entities instead of
+only identifying isolated keywords.
+
+---
+
+# PHASE 5: GROUNDED QUESTION GENERATION ENGINE
+
+## RAG + LLM
+
+☐ Build Resume Context Retriever
+
+   ├── Resume section text
+   ├── Extracted entities
+   └── Relationship triplets
+
+☐ Design Grounded Question Generation Prompts
+
+   ├── Fundamentals
+   ├── Implementation decisions
+   ├── Architecture
+   ├── Performance
+   ├── Metrics
+   ├── Failure modes
+   └── Edge cases
+
+☐ Implement Difficulty Levels
+
+   ├── Level 1 — Fundamentals
+   ├── Level 2 — Application
+   ├── Level 3 — Implementation
+   ├── Level 4 — Architecture
+   └── Level 5 — Advanced/Senior Depth
+
+☐ Implement Grounding Validation
+
+   ├── Check referenced entities
+   ├── Check referenced technologies
+   ├── Check referenced claims
+   └── Reject/regenerate unsupported questions
+
+☐ Prevent Duplicate Questions
+
+☐ Store Questions in PostgreSQL
+
+   ├── Question
+   ├── Difficulty
+   ├── Category
+   ├── Resume Anchor
+   └── Relationship Reference
+
+☐ Create Question Generation Endpoint
+
+☐ Test Using Postman
+
+   └── Generate 5+ grounded questions for a resume
+
+### MILESTONE
+
+The system generates personalized interview questions grounded
+in the candidate's actual resume and extracted knowledge.
+
+Question quality and grounding are validated rather than assumed.
+
+---
+
+# PHASE 6: ANSWER EVALUATION & SCORING ENGINE
+
+☐ Create Answer Submission Endpoint
+
+   POST /api/interview/submit-answer
+
+☐ Implement Answer Evaluation Engine
+
+☐ Evaluate:
+
+   ├── Technical Accuracy
+   ├── Conceptual Understanding
+   ├── Depth of Explanation
+   ├── Implementation Knowledge
+   ├── Architectural Reasoning
+   └── Missing Concepts
+
+☐ Generate Structured Evaluation
+
+   ├── Score: 0–10
+   ├── Strengths
+   ├── Weaknesses
+   ├── Missing Concepts
+   └── Feedback
+
+☐ Persist Answers
+
+   ├── Candidate Answer
+   ├── Score
+   ├── Feedback
+   └── Identified Knowledge Gaps
+
+☐ Update Running Session Score
+
+☐ Test Strong, Medium, and Weak Answers
+
+### MILESTONE
+
+The system evaluates candidate answers and identifies specific
+knowledge gaps that can be used by the adaptive interview engine.
+
+---
+
+# PHASE 7: ADAPTIVE INTERVIEW CONTROLLER
+
+## STATE MACHINE
+
+☐ Create Interview Session Lifecycle
+
+   POST /api/interview/start
+
+   POST /api/interview/end
+
+☐ Implement Adaptive Question Selection
+
+   If Score < 5.0
+      ↓
+   Generate targeted follow-up for the identified knowledge gap.
+
+   If Score 5.0–7.5
+      ↓
+   Ask for implementation details, reasoning, or metric evidence.
+
+   If Score > 7.5
+      ↓
+   Increase difficulty and ask architecture/failure-mode questions.
+
+☐ Implement Parent-Child Question Relationships
+
+   parent_question_id
+
+☐ Maintain Interview State
+
+   ├── Previously asked questions
+   ├── Tested entities
+   ├── Tested relationships
+   ├── Knowledge gaps
+   └── Current difficulty
+
+☐ Implement Duplicate Prevention
+
+☐ Implement Topic Coverage Tracking
+
+☐ Test 5-Turn Adaptive Interview
+
+   Question
+      ↓
+   Answer
+      ↓
+   Evaluation
+      ↓
+   Knowledge Gap Detection
+      ↓
+   Next Question
+      ↓
+   Repeat
+
+### MILESTONE
+
+The system behaves like an adaptive interviewer rather than
+a static question generator.
+
+Strong answers increase difficulty.
+
+Weak answers trigger targeted probing.
+
+Partial answers trigger clarification/deeper probing.
+
+---
+
+# PHASE 8: CANDIDATE PROFILING & FINAL ANALYTICS
+
+☐ Implement SQL Analytics Queries
+
+☐ Calculate:
+
+   ├── Overall Interview Score
+   ├── Category-wise Performance
+   ├── Database Knowledge
+   ├── Backend Knowledge
+   ├── Security Knowledge
+   ├── System Design Knowledge
+   ├── Strengths
+   ├── Weaknesses
+   ├── Knowledge Gaps
+   └── High-Priority Improvement Areas
+
+☐ Track Resume Claim Verification
+
+   ├── Strongly Verified Claims
+   ├── Partially Verified Claims
+   └── Unverified/Shaky Claims
+
+☐ Create Final Report Endpoint
+
+   GET /api/interview/{session_id}/report
+
+☐ Mark Interview Session as COMPLETED
+
+☐ Test Complete Session Analytics
+
+### MILESTONE
+
+The system generates an evidence-based candidate profile from
+actual interview performance rather than producing an arbitrary
+single score.
+
+---
+
+# PHASE 9: EVALUATION & BENCHMARKING
+
+☐ Create Ground-Truth Dataset
+
+   └── 20 Annotated Resumes
+
+☐ Evaluate Entity Extraction
+
+   ├── Precision
+   ├── Recall
+   └── F1-Score
+
+☐ Evaluate Relationship Extraction
+
+   ├── Precision
+   ├── Recall
+   └── F1-Score
+
+☐ Evaluate Question Generation
+
+   ├── Resume relevance
+   ├── Technical relevance
+   ├── Grounding accuracy
+   ├── Difficulty accuracy
+   ├── Duplicate-question rate
+   └── Relationship coverage
+
+☐ Evaluate Adaptive Questioning
+
+   ├── Follow-up relevance
+   ├── Knowledge-gap targeting
+   └── Difficulty adaptation
+
+☐ Benchmark Latency
+
+   ├── Resume parsing time
+   ├── Entity extraction time
+   ├── Relationship extraction time
+   ├── Question generation time
+   └── Answer evaluation time
+
+☐ Compare Against Baseline
+
+   Baseline:
+   Generic single-prompt LLM question generation
+
+   Proposed:
+   Transformer + relationship extraction + RAG +
+   grounded question generation + adaptive controller
+
+☐ Document Experimental Results
+
+### MILESTONE
+
+The project has quantitative evidence demonstrating how well
+the proposed pipeline performs compared with a simpler baseline.
+
+---
+
+# PHASE 10: FRONTEND CLIENT
+
+## React + Vite + Tailwind CSS
+
+☐ Configure React Router
+
+☐ Create Base Application Layout
+
+☐ Build Resume Upload Interface
+
+   ├── Drag & Drop
+   ├── File Validation
+   ├── Upload Progress
+   └── Processing Status
+
+☐ Build Resume Intelligence Preview
+
+   ├── Extracted Skills
+   ├── Technologies
+   ├── Projects
+   ├── Entities
+   └── Relationship Triplets
+
+☐ Build Interactive Interview Console
+
+   ├── Current Question
+   ├── Difficulty Badge
+   ├── Resume Source/Claim
+   ├── Candidate Answer Box
+   ├── Submit Answer
+   ├── Loading State
+   └── Interview Progress
+
+☐ Build Context Panel
+
+   ├── Claim being tested
+   ├── Related technologies
+   └── Relationship being evaluated
+
+☐ Build Final Analytics Dashboard
+
+   ├── Overall Score
+   ├── Category Breakdown
+   ├── Strengths
+   ├── Weaknesses
+   ├── Knowledge Gaps
+   ├── Verified Claims
+   ├── Unverified Claims
+   └── Complete Q&A Review
+
+☐ Implement Responsive UI
+
+☐ Polish UI/UX
+
+### MILESTONE
+
+A complete frontend communicates with all backend REST APIs
+and provides the complete resume → interview → report workflow.
+
+---
+
+# PHASE 11: END-TO-END INTEGRATION & POLISH
+
+☐ Test Complete Workflow
+
+   Resume Upload
+       ↓
+   PDF Extraction
+       ↓
+   Entity Extraction
+       ↓
+   Relationship Extraction
+       ↓
+   Question Generation
+       ↓
+   Interview
+       ↓
+   Answer Evaluation
+       ↓
+   Adaptive Follow-Up
+       ↓
+   Final Report
+
+☐ Implement Edge-Case Handling
+
+   ├── Empty resume
+   ├── Corrupt PDF
+   ├── Very short resume
+   ├── Missing sections
+   ├── Extremely short answers
+   ├── Very long answers
+   ├── API timeout
+   ├── Database failure
+   └── Invalid requests
+
+☐ Implement Backend Error Handling
+
+☐ Implement Input Validation & Sanitization
+
+☐ Verify Database Integrity
+
+☐ Verify API Contracts
+
+☐ Test Frontend + Backend Integration
+
+☐ Clean Code & Remove Debug Code
+
+☐ Update Documentation
+
+☐ Create Demo Dataset
+
+☐ Code Freeze
+
+☐ Git Commit
+
+☐ Git Tag Demo Release
+
+### MILESTONE
+
+A stable end-to-end system is ready for demonstration,
+evaluation, documentation, and deployment.
+
+---
+
+# FINAL SYSTEM ARCHITECTURE
+
+Resume PDF
+    ↓
+PDF Text Extraction
+    ↓
+Text Cleaning & Section Detection
+    ↓
+Transformer-Based Entity Extraction
+    ↓
+Entity Normalization
+    ↓
+Relationship Extraction
+    ↓
+Candidate Knowledge Representation
+    ↓
+PostgreSQL
+    ↓
+RAG Context Retrieval
+    ↓
+LLM Question Generation
+    ↓
+Grounding Validation
+    ↓
+Interview Session
+    ↓
+Candidate Answer
+    ↓
+Answer Evaluation
+    ↓
+Knowledge Gap Detection
+    ↓
+Adaptive Question Controller
+    ↓
+Next Question
+    ↓
+[Repeat]
+    ↓
+Final Candidate Analytics
+    ↓
+React Dashboard
+
+---
+
+# CORE DATABASE STRUCTURE
+
+resumes
+    ↓
+resume_skills
+    ↓
+skills
+
+resumes
+    ↓
+relationships
+
+resumes
+    ↓
+interview_sessions
+    ↓
+interview_questions
+    ↓
+interview_answers
+
+interview_questions
+    ↓
+parent_question_id
+    ↓
+Adaptive Question Tree
+
+---
+
+# DEVELOPMENT ORDER
+
+Phase 1  → Database & FastAPI Foundation
+Phase 2  → Resume Processing
+Phase 3  → Entity Extraction
+Phase 4  → Relationship Extraction
+Phase 5  → Grounded Question Generation
+Phase 6  → Answer Evaluation
+Phase 7  → Adaptive Interview
+Phase 8  → Analytics & Candidate Profile
+Phase 9  → Evaluation & Benchmarking
+Phase 10 → React Frontend
+Phase 11 → Integration & Polish
+
+---
+
+# DEVELOPMENT WORKFLOW RULE
+
+After completing every phase:
+
+1. Test all relevant endpoints using Postman.
+2. Test database queries using pgAdmin or psql.
+3. Verify the output before moving to the next phase.
+4. Handle validation and edge cases.
+5. Commit the working code to GitHub.
+6. Use a descriptive Git commit message.
+7. Tag major completed phases when appropriate.
+
+Example:
+
+git add .
+git commit -m "Phase 3: Implement Transformer entity extraction"
+git tag phase-3-entity-extraction
+
+---
+
+# IMPORTANT PROJECT PRINCIPLES
+
+1. Do not generate questions from the resume alone.
+   Use structured entities + relationships + retrieved resume context.
+
+2. Do not assume relationship extraction is perfect.
+   Measure its accuracy during Phase 9.
+
+3. Do not assume questions are hallucination-free.
+   Validate every generated question against available resume evidence.
+
+4. Do not make the interview static.
+   The next question should depend on the candidate's previous answer.
+
+5. Do not rely only on an overall score.
+   Track specific strengths, weaknesses, claims, relationships,
+   and knowledge gaps.
+
+6. Do not build unnecessary features during the MVP.
+   Focus on the core intelligence pipeline.
+
+7. Keep PostgreSQL responsible for structured application data.
+   Use the retrieval/vector layer only where semantic retrieval
+   actually provides value.
+
+8. Keep the system modular so individual AI components can be
+   replaced or improved without rewriting the entire application.
+
+---
+
+# MVP DEFINITION
+
+The MVP is complete when the following workflow works:
+
+Upload Resume
+      ↓
+Extract Resume Text
+      ↓
+Extract Entities
+      ↓
+Extract Relationships
+      ↓
+Generate Grounded Questions
+      ↓
+Candidate Answers
+      ↓
+Evaluate Answer
+      ↓
+Generate Adaptive Follow-Up
+      ↓
+Complete Interview
+      ↓
+Generate Candidate Report
+
+The MVP does NOT require:
+
+✗ Voice Interview
+✗ Avatar
+✗ Facial Emotion Detection
+✗ Mobile Application
+✗ Complex Recommendation Engine
+✗ Massive Knowledge Graph
+✗ Fine-Tuning BERT from Scratch
+✗ Advanced Career Recommendation System
+
+---
+
+# PROJECT SUCCESS CRITERIA
+
+The project should demonstrate that:
+
+1. Resume information can be converted into structured entities.
+
+2. Relationships between technologies, projects, and implementation
+   claims can be identified.
+
+3. Interview questions can be grounded in those extracted claims.
+
+4. Candidate answers can be evaluated against the question context.
+
+5. The next question can dynamically adapt to the candidate's
+   demonstrated knowledge.
+
+6. The final report can identify evidence-based strengths,
+   weaknesses, and knowledge gaps.
+
+7. The complete pipeline can be quantitatively evaluated against
+   a simpler baseline.
+
+8. The system can demonstrate measurable improvements in relevance,
+   grounding, adaptability, or other selected evaluation metrics.
+
+---
+
+# TECHNOLOGY STACK
+
+Frontend:
+    React
+    Vite
+    Tailwind CSS
+    Axios
+    React Router
+
+Backend:
+    Python
+    FastAPI
+    SQLAlchemy
+
+Database:
+    PostgreSQL
+
+Resume Processing:
+    pdfplumber
+
+NLP / AI:
+    Hugging Face Transformers
+    BERT/Transformer-based models
+    RAG
+    LLM
+
+Testing:
+    Postman
+    pytest
+    pgAdmin / psql
+
+Development:
+    VS Code
+    Git
+    GitHub
+
+Optional:
+    Google Colab for GPU-based experiments/fine-tuning
+
+---
+
+# TARGET OUTCOME
+
+IntervAI should not simply be:
+
+"Upload resume → Generate 100 questions."
+
+It should be:
+
+"Upload resume → Understand the candidate → Identify claims and
+relationships → Ask the most relevant question → Evaluate the answer
+→ Identify the knowledge gap → Decide what to ask next → Build an
+evidence-based candidate profile."
+
+This adaptive, resume-grounded interview loop is the core intelligence
+of the project.
