@@ -11,4 +11,5 @@
    questions, answers     through migrations
 
 
-   
+
+   SQLAlchemy = Python ↔ Database bridge
