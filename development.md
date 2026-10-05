@@ -272,10 +272,10 @@ Here’s the development roadmap for IntervAI.
 
 ---
 
-# Phase 8: Candidate Analytics & Report
+# Phase 8: Candidate Analytics, Final Report & Voice Demonstrator
 
 - [ ] Create Interview Analytics Service
-- [ ] Calculate Overall Score
+- [ ] Calculate Overall Interview Score
 - [ ] Calculate Category Scores
 - [ ] Calculate Backend Performance
 - [ ] Calculate Database Performance
@@ -288,7 +288,7 @@ Here’s the development roadmap for IntervAI.
 - [ ] Track Tested Skills
 - [ ] Track Tested Relationships
 - [ ] Track Verified Resume Claims
-- [ ] Track Partially Verified Claims
+- [ ] Track Partially Verified Resume Claims
 - [ ] Track Unverified Resume Claims
 - [ ] Generate Improvement Areas
 - [ ] Generate Interview Summary
@@ -299,10 +299,61 @@ Here’s the development roadmap for IntervAI.
 - [ ] Test Category-wise Analytics
 - [ ] Test Claim Verification Analytics
 
+## Voice Demonstrator
+
+- [ ] Create Text-to-Speech Service
+- [ ] Convert Generated Interview Questions to Speech
+- [ ] Play AI Question Through Browser
+- [ ] Add Start/Stop Voice Controls
+- [ ] Add Question Playback State
+- [ ] Add Loading State During Speech Generation
+- [ ] Create Speech-to-Text Input
+- [ ] Capture Candidate Voice Response
+- [ ] Convert Candidate Speech to Text
+- [ ] Send Transcribed Answer to Existing Evaluation Engine
+- [ ] Connect Voice Answer → Answer Evaluation
+- [ ] Connect Evaluation → Adaptive Question Controller
+- [ ] Convert Adaptive Follow-up Question to Speech
+- [ ] Test Complete Voice Interview Loop
+
+### Voice Flow:
+
+Question Generated
+        ↓
+Text-to-Speech
+        ↓
+🔊 AI Asks Question
+        ↓
+🎤 Candidate Speaks
+        ↓
+Speech-to-Text
+        ↓
+Answer Evaluation
+        ↓
+Knowledge Gap Detection
+        ↓
+Adaptive Question Generation
+        ↓
+Text-to-Speech
+        ↓
+🔊 AI Asks Follow-up
+
 ### Milestone:
 
-- System generates an evidence-based candidate performance report
-- Report explains strengths, weaknesses, knowledge gaps, and verified claims
+- Complete functional IntervAI MVP is working
+- Resume can be analyzed and converted into structured knowledge
+- Grounded interview questions can be generated
+- Candidate answers can be evaluated
+- Questions adapt based on candidate performance
+- Final candidate analytics report is generated
+- AI can verbally ask generated interview questions
+- Candidate can optionally answer using voice
+- Voice input is converted to text and passed through the existing evaluation pipeline
+- Complete Resume → Interview → Evaluation → Adaptive Follow-up → Report workflow works
+
+### MVP Status:
+
+🟢 FUNCTIONAL MVP COMPLETE
 
 ---
 
