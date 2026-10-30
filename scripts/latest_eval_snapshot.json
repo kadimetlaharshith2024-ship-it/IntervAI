@@ -1,0 +1,71 @@
+{
+  "total_sessions": 35,
+  "total_questions": 193,
+  "total_traces": 363,
+  "latency": {
+    "count": 363,
+    "p50_ms": 8510.77,
+    "p90_ms": 35658.76,
+    "p95_ms": 86773.86,
+    "max_ms": 286853.6,
+    "share_over_10s_pct": 41.87
+  },
+  "strategy_distribution": {
+    "CLAIM_VERIFICATION": 70,
+    "UNCOVERED_TOPIC": 82,
+    "RELATIONSHIP_VERIFICATION": 9,
+    "DIFFICULTY_ESCALATION": 4,
+    "GAP_FOLLOW_UP": 26,
+    "PARTIAL_CLARIFICATION": 2
+  },
+  "difficulty_matrix": {
+    "Req 1": {
+      "Ass 1": 18,
+      "Ass 2": 1,
+      "Ass 3": 0,
+      "Ass 4": 0,
+      "Ass 5": 0
+    },
+    "Req 2": {
+      "Ass 1": 1,
+      "Ass 2": 23,
+      "Ass 3": 4,
+      "Ass 4": 0,
+      "Ass 5": 0
+    },
+    "Req 3": {
+      "Ass 1": 0,
+      "Ass 2": 2,
+      "Ass 3": 88,
+      "Ass 4": 6,
+      "Ass 5": 0
+    },
+    "Req 4": {
+      "Ass 1": 0,
+      "Ass 2": 0,
+      "Ass 3": 0,
+      "Ass 4": 37,
+      "Ass 5": 4
+    },
+    "Req 5": {
+      "Ass 1": 0,
+      "Ass 2": 0,
+      "Ass 3": 0,
+      "Ass 4": 7,
+      "Ass 5": 2
+    }
+  },
+  "topics": {
+    "unique_topics_count": 48,
+    "junk_topics_count": 0,
+    "junk_topic_rate_pct": 0.0,
+    "sample_junk_topics": [],
+    "avg_coverage_pct": 10.85
+  },
+  "pii_scan": {
+    "resume_chunks": 0,
+    "resume_claims": 0,
+    "relationships": 0,
+    "interview_questions": 0
+  }
+}

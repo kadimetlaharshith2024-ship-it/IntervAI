@@ -1,0 +1,82 @@
+{
+  "total_sessions": 35,
+  "total_questions": 172,
+  "total_traces": 342,
+  "latency": {
+    "count": 342,
+    "p50_ms": 9124.96,
+    "p90_ms": 39440.08,
+    "p95_ms": 90634.98,
+    "max_ms": 286853.6,
+    "share_over_10s_pct": 44.44
+  },
+  "strategy_distribution": {
+    "CLAIM_VERIFICATION": 70,
+    "UNCOVERED_TOPIC": 61,
+    "RELATIONSHIP_VERIFICATION": 9,
+    "DIFFICULTY_ESCALATION": 4,
+    "GAP_FOLLOW_UP": 26,
+    "PARTIAL_CLARIFICATION": 2
+  },
+  "difficulty_matrix": {
+    "Req 1": {
+      "Ass 1": 18,
+      "Ass 2": 1,
+      "Ass 3": 0,
+      "Ass 4": 0,
+      "Ass 5": 0
+    },
+    "Req 2": {
+      "Ass 1": 1,
+      "Ass 2": 23,
+      "Ass 3": 4,
+      "Ass 4": 0,
+      "Ass 5": 0
+    },
+    "Req 3": {
+      "Ass 1": 0,
+      "Ass 2": 2,
+      "Ass 3": 74,
+      "Ass 4": 6,
+      "Ass 5": 0
+    },
+    "Req 4": {
+      "Ass 1": 0,
+      "Ass 2": 0,
+      "Ass 3": 0,
+      "Ass 4": 30,
+      "Ass 5": 4
+    },
+    "Req 5": {
+      "Ass 1": 0,
+      "Ass 2": 0,
+      "Ass 3": 0,
+      "Ass 4": 7,
+      "Ass 5": 2
+    }
+  },
+  "topics": {
+    "unique_topics_count": 125,
+    "junk_topics_count": 30,
+    "junk_topic_rate_pct": 24.0,
+    "sample_junk_topics": [
+      "A Rank Of 299 In Ap Eapcet (Engineering) 2024 Among More Tha",
+      "A Rank Of 577 In Ts Eapcet (Engineering) 2024 Among More Tha",
+      "Accuracy",
+      "Bachelor Of Technology In Computer Science And Engineering",
+      "Candidate",
+      "College",
+      "Distributed Inventory and Order Consistency System",
+      "English",
+      "Face Recognition Door Lock System July",
+      "Global Rank 2790 In Codeforces Round 1105 (Div. 2)."
+    ],
+    "avg_coverage_pct": 4.89
+  },
+  "pii_scan": {
+    "resume_chunks": 15,
+    "resume_claims": 3,
+    "relationships": 0,
+    "interview_questions": 6
+  }
+}
